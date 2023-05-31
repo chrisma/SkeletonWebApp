@@ -1,4 +1,6 @@
 package com.develogical;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class QueryProcessor {
 
@@ -14,6 +16,25 @@ public class QueryProcessor {
 
     if (query.toLowerCase().contains("what is your name")) {
       return "Christoph";
+    }
+
+    if (query.toLowerCase().contains("which of the following numbers is the largest")) {
+      // Create a pattern to match the numbers at the end
+      Pattern pattern = Pattern.compile("\\d+");
+        
+      // Create a matcher with the input string
+      Matcher matcher = pattern.matcher(query);
+      
+      int largestNumber = Integer.MIN_VALUE; // Initialize with the smallest possible integer value
+      
+      // Find the largest number
+      while (matcher.find()) {
+          int number = Integer.parseInt(matcher.group());
+          if (number > largestNumber) {
+              largestNumber = number;
+          }
+      }
+      return Integer.toString(largestNumber);
     }
 
     return "";
