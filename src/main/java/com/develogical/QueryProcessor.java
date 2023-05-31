@@ -37,6 +37,28 @@ public class QueryProcessor {
       return Integer.toString(largestNumber);
     }
 
+    if (query.toLowerCase().contains("multiplied by")) {
+      // Create a pattern to match the numbers
+      Pattern pattern = Pattern.compile("\\d+");
+        
+      // Create a matcher with the input string
+      Matcher matcher = pattern.matcher(query);
+      
+      int firstNumber = 0;
+      int secondNumber = 0;
+      
+      // Find the first two numbers
+      if (matcher.find()) {
+          firstNumber = Integer.parseInt(matcher.group());
+      }
+      if (matcher.find()) {
+          secondNumber = Integer.parseInt(matcher.group());
+      }
+      
+      int result = firstNumber * secondNumber;
+      return Integer.toString(result);
+    }
+
     return "";
   }
 }
